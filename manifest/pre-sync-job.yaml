@@ -1,17 +1,16 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: pre-sync-job
-annotations:
-  argocd.argoproj.io/hook: PreSync 
-  argocd.argoproj.io/hook-delete-policy: HookSucceeded
+  name: pre-sync-job 
+  annotations:
+    argocd.argoproj.io/hook: PreSync  
+    argocd.argoproj.io/hook-delete-policy: HookFailed
 spec:
+  backoffLimit: 3
   template:
     spec:
       containers:
       - name: sleep
         image: alpine:latest
-        command: ["sleep",  "10"]
+        command: ["sleep", "10"]
       restartPolicy: Never
-  backoffLimit: 0
-
