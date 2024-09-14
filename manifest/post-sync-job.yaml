@@ -2,10 +2,12 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: post-sync-job
-annotations:
-  argocd.argoproj.io/hook: PostSync 
-  argocd.argoproj.io/hook-delete-policy: HookFailed
+  namespace: argocd  # Ensure this is the correct namespace
+  annotations:
+    argocd.argoproj.io/hook: PostSync 
+    argocd.argoproj.io/hook-delete-policy: HookFailed
 spec:
+  backoffLimit: 3
   template:
     spec:
       containers:
@@ -13,5 +15,5 @@ spec:
         image: alpine:latest
         command: ["sleep", "10"]
       restartPolicy: Never
-  backoffLimit: 3
+
       
