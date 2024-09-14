@@ -16,5 +16,6 @@ spec:
     namespace: nginx  # Namespace in which to deploy the app
 
   syncPolicy:
+    automated: {}
     syncOptions:
       - CreateNamespace=true
