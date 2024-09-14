@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: project-1
+  namespace: argocd  # Change if ArgoCD is installed in a different namespace
+spec:
+  description: "This is an example project in ArgoCD"
+
+  # Define what source repositories are allowed for this project
+  sourceRepos:
+    - "*"  # Replace with the allowed Git repository URL
+
+  # Define allowed destinations (clusters and namespaces)
+  destinations:
+    - namespace: "*"
+      server: "*" # The in-cluster Kubernetes API server
+    # You can add more clusters or namespaces if needed.
+
+  # Define what cluster resources this project is allowed to manage
+  clusterResourceWhitelist:
+    - group: '*'       # Allow access to all resource groups
+      kind: '*'        # Allow all resource kinds
+
+  # Define what namespace-scoped resources this project is allowed to manage
+  namespaceResourceWhitelist:
+    - group: '*'       # Allow access to all resource groups
+      kind: '*'        # Allow all resource kinds

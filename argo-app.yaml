@@ -5,9 +5,9 @@ metadata:
   namespace: argocd
 
 spec:
-  project: default
+  project: project-1
   source:
-    repoURL: 'https://github.com/abanobmorkosgad/argocd.git'  # Replace with your repo URL
+    repoURL: 'git@github.com:abanobmorkosgad/argocd.git'  # Replace with your repo URL
     targetRevision: main  # You can set a specific branch, tag, or commit
     path: 'manifest'  # Path to the directory containing your YAML manifests
 
