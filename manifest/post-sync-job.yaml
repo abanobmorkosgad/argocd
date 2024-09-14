@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: pre-sync-job
+  name: post-sync-job
 annotations:
   argocd.argoproj.io/hook: PpstSync 
   argocd.argoproj.io/hook-delete-policy: HookFailed
