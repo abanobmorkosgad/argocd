@@ -5,7 +5,7 @@ metadata:
   namespace: argocd  # Ensure this is the correct namespace
   annotations:
     argocd.argoproj.io/hook: PostSync 
-    # argocd.argoproj.io/hook-delete-policy: HookFailed
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec:
   backoffLimit: 3
   template:
