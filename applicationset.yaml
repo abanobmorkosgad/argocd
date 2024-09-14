@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: infra
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: 'https://github.com/abanobmorkosgad/argocd.git'  # Replace with your actual Git repo URL
+        revision: main  # Use the latest commit on the branch
+        directories:
+          - path: 'manifest/*/*'  # Automatically include all subdirectories
+          - path: 'manifest/*'
+  template:
+    metadata:
+      name: '{{path.basename}}-app'  # Dynamically name the app based on the directory
+    spec:
+      project: default
+      source:
+        repoURL: 'https://github.com/abanobmorkosgad/argocd.git'  # Same as above
+        targetRevision: main  # Use the latest commit
+        path: '{{path}}'  # The path will match the subdirectory automatically
+      destination:
+        server: https://kubernetes.default.svc  # Your Kubernetes cluster API server
+        namespace: '{{path.basename}}'  # Create a separate namespace for each app
+      syncPolicy:
+        automated: {}
