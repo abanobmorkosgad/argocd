@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-app
+  namespace: argocd
+
+spec:
+  source:
+    repoURL: 'https://github.com/abanobmorkosgad/argocd.git'  # Replace with your repo URL
+    targetRevision: HEAD  # You can set a specific branch, tag, or commit
+    path: 'manifest'  # Path to the directory containing your YAML manifests
+
+  destination:
+    server: 'https://kubernetes.default.svc'  # Cluster to deploy into (default is the same cluster)
+    namespace: nginx  # Namespace in which to deploy the app
